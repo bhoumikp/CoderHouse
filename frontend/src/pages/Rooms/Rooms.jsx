@@ -79,7 +79,8 @@ import { getAllRooms } from '../../http';
 const Rooms = () => {
     const [showModal, setShowModal] = useState(false);
     const [rooms, setRooms] = useState([]);
-    const user = useSelector((state) => state.auth.user)
+    const user = useSelector((state) => state.auth.user);
+    const isAuth = useSelector((state) => state.auth.isAuth);
 
     useEffect(() => {
         const fetchRooms = async () => {
@@ -139,7 +140,7 @@ const Rooms = () => {
                 </div>
 
                 <div className={styles.roomList}>
-                    {rooms.map((room) => (
+                    {rooms.map((room) => (isAuth)&&(
                            <RoomCard key={room.id} room={room} />
                     ))}
                 </div>
