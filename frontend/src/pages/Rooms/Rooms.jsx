@@ -140,7 +140,7 @@ const Rooms = () => {
                 </div>
 
                 <div className={styles.roomList}>
-                    {rooms.map((room) => (isAuth)&&(
+                    {rooms.map((room) => (isAuth && room.ownerId)&&(
                            <RoomCard key={room.id} room={room} />
                     ))}
                 </div>

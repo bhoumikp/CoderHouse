@@ -60,3 +60,13 @@ body {
     justify-content: center;
     min-height: calc(100vh - 140px);
 }
+
+::-webkit-scrollbar {
+    width: 0.5vw;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 10px;
+    border-radius: 10px;
+    background-color: #0077ff;
+}

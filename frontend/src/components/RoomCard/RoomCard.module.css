@@ -70,7 +70,6 @@
 .roomCardTop img {
     width: 2vw;
     height: 4vh;
-    z-index: 1;
     cursor: pointer;
 }
 
