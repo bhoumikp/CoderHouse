@@ -11,12 +11,12 @@ import { useDispatch } from 'react-redux';
 const StepOtp = () => {
     const [otp, setOtp] = useState('');
     const dispatch = useDispatch();
-    const { username, hash } = useSelector((state) => state.auth.otp);
+    const { email, phone, hash } = useSelector((state) => state.auth.otp);
     async function submit() {
-        console.log(username, hash, otp);  
-        if (!otp || !username || !hash) return;
+        console.log(email, phone, hash, otp);  
+        if (!otp || !(email || phone) || !hash) return;
         try {
-            const { data } = await verifyOtp({ otp, username, hash });
+            const { data } = await verifyOtp({ otp, hash, email, phone });
             dispatch(setAuth(data));
         } catch (err) {
             console.log(err);

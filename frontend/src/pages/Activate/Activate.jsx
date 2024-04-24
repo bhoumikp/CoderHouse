@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import StepName from '../Steps/StepName/StepName';
+import StepName from '../Steps/StepUserName/StepUserName';
 import StepAvatar from '../Steps/StepAvatar/StepAvatar';
 
 const steps = {

@@ -6,52 +6,59 @@ const UserDto = require('../dtos/user-dto');
 
 class AuthController {
     async sendOtp(req, res) {
-        const { username, usernameType } = req.body;
-        if (!username) {
-            return res.status(400).json({ message: 'Username field is required!' });
-        }
-        if (!usernameType) {
-            return res.status(400).json({ message: 'Username Type field is required!' });
+        const { email, phone } = req.body;
+        if (!(email || phone)) {
+            return res.status(400).json({ message: 'Email or Phone field is required!' });
         }
         
         const otp = await otpService.generateOtp();
 
         const ttl = 1000 * 60 * 10; // 10 min
         const expires = Date.now() + ttl;
-        const data = `${username}.${otp}.${expires}`;
+        const data = `${email}.${phone}.${otp}.${expires}`;
         const hash = hashService.hashOtp(data);
 
         console.log(otp);
 
         // send sms OTP
-        if(usernameType === 'phone') {
+        if(phone) {
             try {
-                await otpService.sendBySms(username, otp, ttl);
-                res.json({
+                await otpService.sendBySms(phone, otp, ttl);
+                return res.json({
                     hash: `${hash}.${expires}`,
-                    username,
+                    phone,
                 });
             } catch (err) {
                 console.log(err);
-                res.status(500).json({ message: 'message sending failed', error: err });
+                return res.status(500).json({ message: 'phone otp sending failed', error: err });
             }
         }
 
         // send email OTP
-        if(usernameType === 'email') {
-
+        if(email) {
+            try {
+                await otpService.sendByEmail(email, otp, ttl);
+                return res.json({
+                    hash: `${hash}.${expires}`,
+                    email,
+                });
+            } catch(err) {
+                console.log(err);
+                return res.status(500).json({ message: 'email otp sending failed', error: err });
+            }
         }
     }
 
     async verifyOtp(req, res) {
-        const { otp, hash, username } = req.body;
-        console.log(otp, hash, username);
-        if (!otp || !hash || !username) {
+        const { otp, hash, email, phone } = req.body;
+        console.log(otp, hash, email, phone);
+        if (!otp || !hash || !(email || phone)) {
             return res.status(400).json({ message: 'All fields are required!' });
         }
 
         const [hashedOtp, expires] = hash.split('.');
-        const data = `${username}.${otp}.${expires}`;
+        // const data = `${username}.${otp}.${expires}`;
+        const data = `${email}.${phone}.${otp}.${expires}`;
         const isValid = otpService.verifyOtp(hashedOtp, data);
         if (!isValid) {
             return res.status(400).json({ message: 'Invalid OTP' });
@@ -63,15 +70,25 @@ class AuthController {
 
         let user;
         try {
-            user = await userService.findUser({ username });
-            if (!user) {
-                user = await userService.createUser({ username });
+            if(phone) {
+                user = await userService.findUser({ phone });
+                if (!user) {
+                    user = await userService.createUser({ phone });
+                }
             }
+            
+            if(email) {
+                user = await userService.findUser({ email });
+                if (!user) {
+                    user = await userService.createUser({ email });
+                }
+            }
+            
         } catch (err) {
             console.log(err);
             return res.status(500).json({ message: 'Db error', error: err });
         }
-
+            
         const { accessToken, refreshToken } = tokenService.generateTokens({
             _id: user._id,
             activated: false,

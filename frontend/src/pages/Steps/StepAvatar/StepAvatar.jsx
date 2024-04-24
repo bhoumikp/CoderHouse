@@ -10,7 +10,7 @@ import Loader from '../../../components/shared/Loader/Loader';
 
 const StepAvatar = ({ onNext }) => {
     const dispatch = useDispatch();
-    const { name, avatar } = useSelector((state) => state.activate);
+    const { username, avatar } = useSelector((state) => state.activate);
     const [image, setImage] = useState('/images/monkey-avatar.png');
     const [loading, setLoading] = useState(false);
     const [unMounted, setUnMounted] = useState(false);
@@ -24,11 +24,13 @@ const StepAvatar = ({ onNext }) => {
             dispatch(setAvatar(reader.result));
         };
     }
+
     async function submit() {
-        if (!name || !avatar) return;
+        if (!username || !avatar) return;
         setLoading(true);
+        console.log(avatar);
         try {
-            const { data } = await activate({ name, avatar });
+            const { data } = await activate({ username, avatar });
             if (data.auth) {
                 if (!unMounted) {
                     dispatch(setAuth(data));
@@ -50,7 +52,7 @@ const StepAvatar = ({ onNext }) => {
     if (loading) return <Loader message="Activation in progress..." />;
     return (
         <>
-            <Card title={`Okay, ${name}`} icon="monkey-emoji">
+            <Card title={`Okay, ${username}`} icon="monkey-emoji">
                 <p className={styles.subHeading}>How’s this photo?</p>
                 <div className={styles.avatarWrapper}>
                     <img

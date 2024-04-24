@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^14.5.2",
     "axios": "^1.6.8",
     "freeice": "^2.2.2",
+    "nodemailer": "^6.9.13",
     "react": "^18.2.0",
     "react-codemirror2": "^8.0.0",
     "react-dom": "^18.2.0",

@@ -1,7 +1,8 @@
 class UserDto {
     id;
     phone;
-    name;
+    email;
+    username;
     avatar;
     activated;
     createdAt;
@@ -9,7 +10,8 @@ class UserDto {
     constructor(user) {
         this.id = user._id;
         this.phone = user.phone;
-        this.name = user.name;
+        this.email = user.email;
+        this.username = user.username;
         this.avatar = user.avatar;
         this.activated = user.activated;
         this.createdAt = user.createdAt;

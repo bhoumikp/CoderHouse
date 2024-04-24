@@ -3,9 +3,9 @@
 }
 
 .bottomParagraph {
-    composes: bottomParagraph from '../StepUsername/StepUsername.module.css';
+    composes: bottomParagraph from '../StepEmailPhone/StepEmailPhone.module.css';
 }
 
 .actionButtonWrap {
-    composes: actionButtonWrap from '../StepUsername/StepUsername.module.css';
+    composes: actionButtonWrap from '../StepEmailPhone/StepEmailPhone.module.css';
 }

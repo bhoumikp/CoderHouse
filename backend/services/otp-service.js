@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const hashService = require('./hash-service');
+const nodemailer = require("nodemailer");
 
 const smsSid = process.env.SMS_SID;
 const smsAuthToken = process.env.SMS_AUTH_TOKEN;
@@ -21,6 +22,37 @@ class OtpService {
             from: process.env.SMS_FROM_NUMBER,
             body: `Your codershouse OTP is ${otp}. It will expire in ${expire_mins} min`,
         });
+    }
+
+    async sendByEmail(email, otp, ttl) {
+        const expire_mins = ttl / (60 * 1000);
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                type: 'OAuth2',
+                user: process.env.NODEMAILER_EMAIL,
+                pass: process.env.NODEMAILER_PASSWORD,
+                clientId: process.env.GMAIL_CLIENT_ID,
+                clientSecret: process.env.GMAIL_CLIENT_SECRET,
+                refreshToken: process.env.GMAIL_REFRESH_TOKEN
+            }
+        });
+
+        const mailOptions = {
+            from: "bhoumikpagdhare2002@gmail.com",
+            to: email,
+            subject: 'CoderHouse Login OTP',
+            text: `Your codershouse OTP is ${otp}. It will expire in ${expire_mins} min`
+        };
+
+        transporter.sendMail(mailOptions, function(err, data) {
+            if (err) {
+              console.log("Error: " + err);
+            } else {
+              console.log("Email sent successfully");
+            }
+          });
     }
 
     verifyOtp(hashedOtp, data) {

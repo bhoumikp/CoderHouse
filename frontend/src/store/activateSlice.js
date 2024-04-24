@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    name: '',
+    username: '',
     avatar: '',
 };
 
@@ -9,8 +9,8 @@ export const activateSlice = createSlice({
     name: 'activate',
     initialState,
     reducers: {
-        setName: (state, action) => {
-            state.name = action.payload;
+        setUsername: (state, action) => {
+            state.username = action.payload;
         },
         setAvatar: (state, action) => {
             state.avatar = action.payload;
@@ -18,6 +18,6 @@ export const activateSlice = createSlice({
     },
 });
 
-export const { setName, setAvatar } = activateSlice.actions;
+export const { setUsername, setAvatar } = activateSlice.actions;
 
 export default activateSlice.reducer;

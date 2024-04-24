@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Card from '../../../../components/shared/Card/Card';
 import Button from '../../../../components/shared/Button/Button';
 import TextInput from '../../../../components/shared/TextInput/TextInput';
-import styles from '../StepUsername.module.css';
+import styles from '../StepEmailPhone.module.css';
 import PhoneInput from 'react-phone-number-input';
 import { sendOtp } from '../../../../http/index';
 import { useDispatch } from 'react-redux';
@@ -17,9 +17,9 @@ const Phone = ({ onNext }) => {
     async function submit() {
         console.log(phoneNumber);
         if (!phoneNumber) return;
-        const { data } = await sendOtp({ username: phoneNumber, usernameType: 'phone' });
-        console.log(data.username);
-        dispatch(setOtp({ username: data.username, hash: data.hash }));
+        const { data } = await sendOtp({ phone: phoneNumber });
+        console.log(data.email, data.phone);
+        dispatch(setOtp({ email: data.email, phone: data.phone, hash: data.hash }));
         onNext();
     }
 

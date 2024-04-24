@@ -6,8 +6,8 @@ const UserDto = require('../dtos/user-dto');
 class ActivateController {
     async activate(req, res) {
         // Activation logic
-        const { name, avatar } = req.body;
-        if (!name || !avatar) {
+        const { username, avatar } = req.body;
+        if (!username || !avatar) {
             res.status(400).json({ message: 'All fields are required!' });
         }
 
@@ -25,7 +25,7 @@ class ActivateController {
             const jimResp = await Jimp.read(buffer);
             jimResp
                 .resize(150, Jimp.AUTO)
-                .write(path.resolve(__dirname, `../storage/${imagePath}`));
+                .write(path.resolve(__dirname, `../storage/avatars/${imagePath}`));
         } catch (err) {
             res.status(500).json({ message: 'Could not process the image' });
         }
@@ -38,8 +38,8 @@ class ActivateController {
                 res.status(404).json({ message: 'User not found!' });
             }
             user.activated = true;
-            user.name = name;
-            user.avatar = `/storage/${imagePath}`;
+            user.username = username;
+            user.avatar = `/storage/avatars/${imagePath}`;
             user.save();
             res.json({ user: new UserDto(user), auth: true });
         } catch (err) {
