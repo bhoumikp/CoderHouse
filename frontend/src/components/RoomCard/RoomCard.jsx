@@ -46,7 +46,7 @@ const RoomCard = ({ room }) => {
                 <div className={styles.names}>
                     {room.speakers.map((speaker) => (
                         <div key={speaker.id} className={styles.nameWrapper}>
-                            <span>{speaker.name}</span>
+                            <span>{speaker.username}</span>
                             <img
                                 src="/images/chat-bubble.png"
                                 alt="chat-bubble"

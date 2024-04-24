@@ -107,7 +107,7 @@ const Room = () => {
                                             )}
                                         </button>
                                     </div>
-                                    <h4 className={(client.id===user.id) && styles.clientBorderBottom}>{client.name}</h4>
+                                    <h4 className={(client.id===user.id) && styles.clientBorderBottom}>{client.username}</h4>
                                 </div>
                             );
                         })}
@@ -150,7 +150,7 @@ const Room = () => {
                                             )}
                                         </button>
                                     </div>
-                                    <h4 className={(client.id===user.id) && styles.clientBorderBottom}>{client.name}</h4>
+                                    <h4 className={(client.id===user.id) && styles.clientBorderBottom}>{client.username}</h4>
                                 </div>
                             );
                         })}
