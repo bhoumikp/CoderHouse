@@ -21,6 +21,7 @@ const Room = () => {
     useEffect(() => {
         const fetchRoom = async () => {
             const { data } = await getRoom(roomId);
+            console.log(data);
             setRoom((prev) => data);
         };
 
@@ -42,7 +43,8 @@ const Room = () => {
         setMuted((prev) => !prev);
     };
 
-    return (
+    console.log(room);
+    return (room) && (
         <div>
             {/* Action buttons */}
             <div className={styles.actionsContainer}>

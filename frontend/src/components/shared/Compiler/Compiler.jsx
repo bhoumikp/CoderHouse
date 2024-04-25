@@ -91,7 +91,9 @@ function Compiler({ socket, roomId }) {
     useEffect(() => {
         if (socket.current) {
             socket.current.on(ACTIONS.OUTPUT_CHANGE, ({ output }) => {
-                outputRef.current.innerText = output;
+                if(outputRef.current){
+                    outputRef.current.innerText = output;
+                }
             });
         }
 
