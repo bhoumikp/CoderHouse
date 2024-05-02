@@ -12,10 +12,8 @@ const Email = ({ onNext }) => {
     const dispatch = useDispatch();
 
     async function submit() {
-        console.log(email);
         if (!email) return;
         const { data } = await sendOtp({ email: email });
-        console.log(data.email, data.phone);
         dispatch(setOtp({ email: data.email, phone: data.phone, hash: data.hash }));
         onNext();
     }
