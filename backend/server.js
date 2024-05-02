@@ -19,7 +19,6 @@ const io = require('socket.io')(server, {
 const corsOption = {
     credentials: true,
     origin: [process.env.FRONT_URL],
-    exposedHeaders: ["Set-Cookie"]
 };
 
 app.use(cookieParser());
