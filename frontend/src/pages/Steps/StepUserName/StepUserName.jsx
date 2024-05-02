@@ -11,7 +11,8 @@ const StepName = ({ onNext }) => {
     const dispatch = useDispatch();
     const [userName, setUserName] = useState(username);
 
-    function nextStep() {
+    function nextStep(e) {
+        e.preventDefault();
         if (!userName) {
             return;
         }
@@ -23,18 +24,20 @@ const StepName = ({ onNext }) => {
     }
     return (
         <>
-            <Card title="Enter a Username" icon="goggle-emoji">
-                <TextInput
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                />
-                <p className={styles.paragraph}>
-                    People use real names at codershouse :) !
-                </p>
-                <div>
-                    <Button onClick={nextStep} text="Next" />
-                </div>
-            </Card>
+            <form onSubmit={nextStep}>
+                <Card title="Enter a Username" icon="goggle-emoji">
+                    <TextInput
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
+                    />
+                    <p className={styles.paragraph}>
+                        People use real names at codershouse :) !
+                    </p>
+                    <div>
+                        <Button text="Next" />
+                    </div>
+                </Card>
+            </form>
         </>
     );
 };

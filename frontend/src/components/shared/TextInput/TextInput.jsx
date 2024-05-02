@@ -10,6 +10,7 @@ const TextInput = (props) => {
                     width: props.fullwidth === 'true' ? '100%' : 'inherit',
                 }}
                 type="text"
+                autoFocus
                 {...props}
             />
         </div>

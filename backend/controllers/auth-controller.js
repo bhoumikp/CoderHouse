@@ -18,7 +18,8 @@ class AuthController {
         const data = `${email}.${phone}.${otp}.${expires}`;
         const hash = hashService.hashOtp(data);
 
-        console.log(otp);
+        const currentTime = new Date().toLocaleTimeString();
+        console.log(otp, currentTime);
 
         // send sms OTP
         if(phone) {
@@ -51,13 +52,11 @@ class AuthController {
 
     async verifyOtp(req, res) {
         const { otp, hash, email, phone } = req.body;
-        console.log(otp, hash, email, phone);
         if (!otp || !hash || !(email || phone)) {
             return res.status(400).json({ message: 'All fields are required!' });
         }
 
         const [hashedOtp, expires] = hash.split('.');
-        // const data = `${username}.${otp}.${expires}`;
         const data = `${email}.${phone}.${otp}.${expires}`;
         const isValid = otpService.verifyOtp(hashedOtp, data);
         if (!isValid) {

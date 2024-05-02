@@ -11,7 +11,8 @@ const Email = ({ onNext }) => {
     const [email, setEmail] = useState('');
     const dispatch = useDispatch();
 
-    async function submit() {
+    async function submit(e) {
+        e.preventDefault();
         if (!email) return;
         const { data } = await sendOtp({ email: email });
         dispatch(setOtp({ email: data.email, phone: data.phone, hash: data.hash }));
@@ -19,21 +20,23 @@ const Email = ({ onNext }) => {
     }
 
     return (
-        <Card title="Enter your email id" icon="email-emoji">
-            <TextInput
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <div>
-                <div className={styles.actionButtonWrap}>
-                    <Button text="Next" onClick={submit} />
-                </div>
-                <p className={styles.bottomParagraph}>
-                    By entering your email, you’re agreeing to our Terms of
-                    Service and Privacy Policy. Thanks!
-                </p>
-            </div>
-        </Card>
+        <form onSubmit={submit}>
+            <Card title="Enter your email id" icon="email-emoji">
+                    <TextInput
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <div>
+                        <div className={styles.actionButtonWrap}>
+                            <Button text="Next" />
+                        </div>
+                        <p className={styles.bottomParagraph}>
+                            By entering your email, you’re agreeing to our Terms of
+                            Service and Privacy Policy. Thanks!
+                        </p>
+                    </div>
+            </Card>
+        </form>
     );
 };
 

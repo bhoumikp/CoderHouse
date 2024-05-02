@@ -14,7 +14,8 @@ const Phone = ({ onNext }) => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const dispatch = useDispatch();
 
-    async function submit() {
+    async function submit(e) {
+        e.preventDefault();
         if (!phoneNumber) return;
         const { data } = await sendOtp({ phone: phoneNumber });
         dispatch(setOtp({ email: data.email, phone: data.phone, hash: data.hash }));
@@ -22,25 +23,28 @@ const Phone = ({ onNext }) => {
     }
 
     return (
-        <Card title="Enter your Phone Number" icon="phone">
-            {/* <TextInput
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-            /> */}
-            <PhoneInput
-                defaultCountry='IN'
-                onChange={setPhoneNumber}
-            />
-            <div>
-                <div className={styles.actionButtonWrap}>
-                    <Button text="Next" onClick={submit} />
+        <form onSubmit={submit}>
+            <Card title="Enter your Phone Number" icon="phone">
+                <TextInput
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+                {/* <PhoneInput
+                    defaultCountry='IN'
+                    onChange={setPhoneNumber}
+                /> */}
+
+                <div>
+                    <div className={styles.actionButtonWrap}>
+                        <Button text="Next" />
+                    </div>
+                    <p className={styles.bottomParagraph}>
+                        By entering your phone number, you’re agreeing to our Terms of
+                        Service and Privacy Policy. Thanks!
+                    </p>
                 </div>
-                <p className={styles.bottomParagraph}>
-                    By entering your phone number, you’re agreeing to our Terms of
-                    Service and Privacy Policy. Thanks!
-                </p>
-            </div>
-        </Card>
+            </Card>
+        </form>
     );
 };
 
