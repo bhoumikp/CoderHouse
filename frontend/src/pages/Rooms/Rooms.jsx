@@ -119,10 +119,12 @@ const Rooms = () => {
             <div className="container">
                 <div className={styles.roomsHeader}>
                     <div className={styles.left}>
-                        <span className={styles.heading}>All voice rooms</span>
+                        <span className={styles.heading}>All rooms</span>
                         <div className={styles.searchBox}>
+                            <form>
+                                <input type="text" className={styles.searchInput} placeholder='Search rooms' autoFocus />
+                            </form>
                             <img src="/images/search-icon.png" alt="search" />
-                            <input type="text" className={styles.searchInput} />
                         </div>
                     </div>
                     <div className={styles.right}>

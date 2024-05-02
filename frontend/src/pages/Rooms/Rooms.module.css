@@ -17,12 +17,16 @@
 
 .searchBox {
     background: #262626;
-    margin-left: 20px;
+    margin-left: 21vw;
     display: flex;
     align-items: center;
-    padding: 0 10px;
-    min-width: 300px;
+    padding: 0 1vw;
+    min-width: 19vw;
     border-radius: 20px;
+}
+
+.searchBox img {
+    cursor: pointer;
 }
 
 .searchInput {

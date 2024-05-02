@@ -1,5 +1,5 @@
 # CoderHouse
-   It is a online code compiler which allows users to and join create rooms. Each room contains a seperate code compiler which can run a code which will be visible to all the room members.
+   It is a online code compiler which allows users to join and create rooms. Each room contains a seperate code compiler which can run a code which will be visible to all the room members.
 
 <br>
 
