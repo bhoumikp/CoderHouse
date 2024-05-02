@@ -6,6 +6,7 @@ module.exports = async function (req, res, next) {
             res.status(404).json({ message: 'No cookies recieved'})
         }
         const { accessToken } = req.cookies;
+        console.log(accessToken);
         if (!accessToken) {
             throw new Error();
         }

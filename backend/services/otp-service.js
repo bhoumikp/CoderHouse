@@ -48,7 +48,7 @@ class OtpService {
 
         transporter.sendMail(mailOptions, function(err, data) {
             if (err) {
-              console.log("Error: " + err);
+              console.log(err);
             } else {
               console.log("Email sent successfully");
             }
