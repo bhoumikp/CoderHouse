@@ -25,14 +25,14 @@ const Phone = ({ onNext }) => {
     return (
         <form onSubmit={submit}>
             <Card title="Enter your Phone Number" icon="phone">
-                <TextInput
+                {/* <TextInput
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
-                />
-                {/* <PhoneInput
+                /> */}
+                <PhoneInput
                     defaultCountry='IN'
                     onChange={setPhoneNumber}
-                /> */}
+                />
 
                 <div>
                     <div className={styles.actionButtonWrap}>
