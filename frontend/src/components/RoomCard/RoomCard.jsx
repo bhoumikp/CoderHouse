@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React from 'react';
 import styles from './RoomCard.module.css';
 import { useNavigate } from 'react-router-dom';
@@ -16,50 +15,57 @@ const RoomCard = ({ room }) => {
     }
 
     return (
-        <div
-            className={styles.card}
-        >
-            <div className={styles.roomCardTop}>
-                <h3 
-                    onClick={() => {
-                        navigate(`/room/${room.id}`);
-                    }}
-                >{room.topic}</h3>
-
-                {(user.id===room.ownerId.id) && <img onClick={() => handleRoomDelete(room.id)} src="images/trash.png" alt=""/>}
-            </div>
-
+        <>
             <div
-                className={`${styles.speakers} ${
-                    room.speakers.length === 1 ? styles.singleSpeaker : ''
-                }`}
-            >
-                <div className={styles.avatars}>
-                    {room.speakers.map((speaker) => (
-                        <img
-                            key={speaker.id}
-                            src={speaker.avatar}
-                            alt="speaker-avatar"
-                        />
-                    ))}
+                className={styles.card}
+                >
+                <div className={styles.roomCardTop}>
+                    <h3 
+                        onClick={() => {
+                            navigate(`/room/${room.id}`);
+                        }}
+                        >{room.topic}</h3>
+
+                    {(user.id===room.ownerId.id) && <img onClick={() => handleRoomDelete(room.id)} src="images/trash.png" alt=""/>}
                 </div>
-                <div className={styles.names}>
-                    {room.speakers.map((speaker) => (
-                        <div key={speaker.id} className={styles.nameWrapper}>
-                            <span>{speaker.username}</span>
+
+                <div
+                    className={`${styles.speakers} ${
+                        room.speakers.length === 1 ? styles.singleSpeaker : ''
+                    }`}
+                >
+                    <div className={styles.avatars}>
+                        {room.speakers.map((speaker) => (
                             <img
-                                src="/images/chat-bubble.png"
-                                alt="chat-bubble"
+                                key={speaker.id}
+                                src={speaker.avatar}
+                                alt="speaker-avatar"
                             />
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+
+                    <div className={styles.names}>
+                        {room.speakers.map((speaker) => (
+                            <div key={speaker.id} className={styles.nameWrapper}>
+                                <span>{speaker.username}</span>
+                                <img
+                                    src="/images/chat-bubble.png"
+                                    alt="chat-bubble"
+                                />
+                            </div>
+                        ))}
+                    </div>
+
                 </div>
+
+                <div className={styles.peopleCount}>
+                    <span>{room.totalPeople}</span>
+                    <img src="/images/user-icon.png" alt="user-icon" />
+                </div>
+
             </div>
-            <div className={styles.peopleCount}>
-                <span>{room.totalPeople}</span>
-                <img src="/images/user-icon.png" alt="user-icon" />
-            </div>
-        </div>
+
+        </>    
     );
 };
 

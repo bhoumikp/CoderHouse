@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import {ACTIONS} from '../../../actions';
-import "./Editor.css";
 import Codemirror from 'codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
 import 'codemirror/addon/edit/closetag';
 import 'codemirror/addon/edit/closebrackets';
+import "./Editor.css";
 import { getRoom } from '../../../http';
 
 const Editor = ({ socketRef, roomId, onCodeChange }) => {
@@ -17,12 +17,13 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
             const response = await getRoom(roomId);
             const room = response.data;
 
-            console.log(room);
             editorRef.current = Codemirror.fromTextArea(
                 document.getElementById('realtimeEditor'),
                 {
-                    mode: { name: 'python', json: true },
+                    mode: { name: 'c++', json: true },
                     theme: 'dracula',
+                    indentUnit: 4,
+                    autocorrect: true,
                     autoCloseTags: true,
                     autoCloseBrackets: true,
                     lineNumbers: true,
@@ -34,7 +35,7 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
                 const { origin } = changes;
                 const code = instance.getValue();
                 onCodeChange(code);
-                // console.log(onCodeChange);
+
                 if (origin !== 'setValue') {
                     socketRef.current.emit(ACTIONS.CODE_CHANGE, {
                         roomId,

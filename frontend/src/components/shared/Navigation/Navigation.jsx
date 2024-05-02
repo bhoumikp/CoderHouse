@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { logout } from '../../../http';
 import styles from './Navigation.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from '../../../store/authSlice';
 
 const Navigation = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
     const brandStyle = {
         color: '#fff',
         textDecoration: 'none',
@@ -24,6 +26,7 @@ const Navigation = () => {
         try {
             const { data } = await logout();
             dispatch(setAuth(data));
+            // window.location.replace('http://localhost:3000')
         } catch (err) {
             console.log(err);
         }
