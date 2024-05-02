@@ -48,10 +48,10 @@
 	   The react server will start and will automatically open in your default browser.
 
 		
-	  <!-- ### IMPORTANT: 
+	  ### IMPORTANT: 
 	  - To run this project, you need to add env files to both, backend and frontend folders. 
 	  - This .env files should contains all the variables which are shown in .env.example files. 
-	  - Assign values to this env variables as your needs. -->
+	  - Assign values to this env variables as your needs.
 
 <br>
 
