@@ -1,7 +1,11 @@
+.roomContainer {
+    margin: 0 2vw;
+}
+
 .actionsContainer {
     display: flex;
     justify-content: space-between;
-    width: 1200px;
+    width: 1300px;
     max-width: 90%;
     margin: 0 auto;
 }
@@ -41,29 +45,28 @@
 .actionBtn {
     background: #262626;
     outline: none;
-    margin-left: 1rem;
     display: flex;
     align-items: center;
     padding: 0.7rem 1rem;
     border-radius: 20px;
     color: #fff;
     transition: all 0.3s ease-in-out;
+    font-weight: bold;
 }
 
 .actionBtn:hover {
     background: #333333;
 }
 
-.actionBtn span {
-    font-weight: bold;
-    margin-right: 1rem;
+.leaveBtn {
+    margin-left: 0.8vw;
 }
 
-.roomContainer {
+.panelContainer {
     display: flex;
     justify-content: space-around;
     background: #1d1d1d;
-    margin: 1rem 0 0;
+    margin: 1rem 0 3vw;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
     height: auto;
