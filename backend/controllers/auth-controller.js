@@ -181,6 +181,14 @@ class AuthController {
         res.clearCookie('accessToken');
         res.json({ user: null, auth: false });
     }
+
+    async deleteUser(req, res) {
+        const { userId } = req.body;
+
+        const deletedUser = userService.deleteUser(userId);
+
+        res.json({ user: deletedUser});
+    }
 }
 
 module.exports = new AuthController();

@@ -15,6 +15,12 @@
     align-items: center;
 }
 
+.profileMenuContainer {
+    position: absolute;
+    top: 8.6vh;
+    right: 6.4vw
+}
+
 .avatar {
     border-radius: 50%;
     object-fit: cover;

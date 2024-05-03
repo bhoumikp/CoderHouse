@@ -14,6 +14,7 @@ const RoomCard = ({ room }) => {
         window.location.reload();
     }
 
+    console.log(room.speakers);
     return (
         <>
             <div
@@ -44,7 +45,7 @@ const RoomCard = ({ room }) => {
                         ))}
                     </div>
 
-                    <div className={styles.names}>
+                    <div className={styles.spekersNames}>
                         {room.speakers.map((speaker) => (
                             <div key={speaker.id} className={styles.nameWrapper}>
                                 <span>{speaker.username}</span>

@@ -35,18 +35,19 @@
     left: 20px;
 }
 
-.names {
-    margin-left: 100px;
+.spekersNames {
+    margin-left: 10px;
 }
 
-.names span {
+.spekersNames span {
     padding-bottom: 5px;
-    display: inline-block;
+    display: inline-block; 
     margin-right: 5px;
 }
 
 .peopleCount {
     text-align: right;
+    margin-top: 6vh;
 }
 
 .peopleCount span {

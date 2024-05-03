@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { logout } from '../../../http';
 import styles from './Navigation.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from '../../../store/authSlice';
+import Menu from '../../Menu/Menu';
 
 const Navigation = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
+    const [showMenu, setShowMenu] = useState(false);
+    const { isAuth, user } = useSelector((state) => state.auth);
+
     const brandStyle = {
         color: '#fff',
         textDecoration: 'none',
@@ -20,17 +22,7 @@ const Navigation = () => {
     const logoText = {
         marginLeft: '10px',
     };
-    const dispatch = useDispatch();
-    const { isAuth, user } = useSelector((state) => state.auth);
-    async function logoutUser() {
-        try {
-            const { data } = await logout();
-            dispatch(setAuth(data));
-            // window.location.replace('http://localhost:3000')
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    
 
     return (
         <nav className={`${styles.navbar} container`}>
@@ -52,14 +44,12 @@ const Navigation = () => {
                         width="40"
                         height="40"
                         alt="avatar"
+                        onClick={() => setShowMenu(!showMenu)}
                     />
 
-                    {/* <button
-                        className={styles.logoutButton}
-                        onClick={logoutUser}
-                    >
-                        <img src="/images/logout.png" alt="logout" />
-                    </button> */}
+                    <div className={styles.profileMenuContainer}>
+                        {(showMenu) && <Menu hideMenu={() => setShowMenu(false)} />}
+                    </div>
                 </div>
             )}
         </nav>
